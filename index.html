@@ -71,6 +71,127 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Android-Termux安装LittlePaimon" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/11/08/Android-Termux%E5%AE%89%E8%A3%85LittlePaimon/" class="article-date">
+  <time class="dt-published" datetime="2022-11-08T09:56:35.000Z" itemprop="datePublished">2022-11-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/11/08/Android-Termux%E5%AE%89%E8%A3%85LittlePaimon/">Android-Termux安装LittlePaimon</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Android-Termux安装LittlePaimon"><a href="#Android-Termux安装LittlePaimon" class="headerlink" title="Android-Termux安装LittlePaimon"></a>Android-Termux安装LittlePaimon</h1><p><strong>本文使用tmoe来快捷在termux上搭建ubuntu</strong></p>
+<h3 id="安装tmoe"><a href="#安装tmoe" class="headerlink" title="安装tmoe"></a>安装tmoe</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -LO https://l.tmoe.me/2.awk &amp;&amp; awk -f 2.awk</span><br><span class="line"># 备用地址：</span><br><span class="line">curl -LO https://gitee.com/mo2/linux/raw/2/2.awk &amp;&amp; awk -f 2.awk</span><br></pre></td></tr></table></figure>
+
+<h3 id="启动tmoe"><a href="#启动tmoe" class="headerlink" title="启动tmoe"></a>启动tmoe</h3><p><img src="https://s1.ax1x.com/2022/10/27/xf3p28.png" alt="xf3p28.png"></p>
+<p><code>选择Manager</code></p>
+<p>在出现 <code>您要继续吗? Do you want to continue?</code> 之类的选项时：<code>[Y/n]直接按回车，[y/N]输入y再回车</code></p>
+<p>由于国内 GitHub 连接较慢，推荐使用 Gitee</p>
+<p><img src="https://s1.ax1x.com/2022/10/27/xf1v5t.png" alt="xf1v5t.png"></p>
+<p>在出现 <code>(Y/I/N/O/D/Z) [default=N] ?</code> 之类的选项时：<code>直接按回车即可</code></p>
+<p><img src="https://s1.ax1x.com/2022/10/27/xf1jUI.png" alt="xf1jUI.png"></p>
+<p>进入 TMOE 后，<strong>有 <code>root 权限</code> 使用 <code>chroot 容器</code>，否则使用 <code>PRoot 容器</code></strong></p>
+<p><img src="https://s1.ax1x.com/2022/10/27/xf1zPP.png" alt="xf1zPP.png"></p>
+<h3 id="安装ubuntu"><a href="#安装ubuntu" class="headerlink" title="安装ubuntu"></a>安装ubuntu</h3><p>首次进入，按提示选择配置：</p>
+<ol>
+<li>DNS 推荐选择：<code>[2400:3200::1] (Ali) 阿里云</code></li>
+<li>一言：<code>按需选择</code></li>
+<li>时区(Timezone)：Asia&#x2F;Shanghai <code>回车</code></li>
+<li>共享目录：用于在容器中访问宿主文件，<code>按需选择</code></li>
+<li>chroot 模式(CHROOT MODE)：用不到 systemctl，<code>选择 normal</code></li>
+</ol>
+<p>进入容器菜单之后，选择 <code>发行版列表</code></p>
+<p><img src="https://s1.ax1x.com/2022/10/27/xf1XVA.png" alt="xf1XVA.png"></p>
+<p>选择<code>Ubuntu</code></p>
+<p><img src="https://s1.ax1x.com/2022/10/27/xf3S8f.png" alt="xf3S8f.png"></p>
+<p>选择第一个<code>22.10(dev)</code></p>
+<p><img src="https://s1.ax1x.com/2022/10/27/xf39xS.png" alt="xf39xS.png"></p>
+<p>选择 <code>启动</code></p>
+<p><img src="https://s1.ax1x.com/2022/10/27/xf3PKg.png" alt="xf3PKg.png"></p>
+<p>等待容器安装完成 (如果在安装中出现问题，可以尝试移除容器后重装)</p>
+<p>首次启动，按提示选择配置：</p>
+<ol>
+<li>新建 sudo 用户：自行选择</li>
+<li>为 root 用户配置 zsh：终端美化，按需选择，<code>推荐 是</code></li>
+<li>delete ~&#x2F;zsh.sh：<code>选择 是</code></li>
+<li>启动tmoe tools?：<code>选择 否</code> (需要使用输入 tmoe 启动即可)</li>
+</ol>
+<p>进入容器命令：<code>tmoe p/c ubuntu-kinetic</code> (p 指 PRoot 容器，c 指 chroot 容器)</p>
+<p>管理容器命令：<code>tmoe</code></p>
+<h3 id="配置基础环境"><a href="#配置基础环境" class="headerlink" title="配置基础环境"></a>配置基础环境</h3><p>执行以下命令安装基础环境，请完整复制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev libsqlite3-dev wget git libbz2-dev libgeos-dev libatk1.0-0 libxdamage1 libxcomposite1 libatspi2.0-0 libcups2 libatk-bridge2.0-0 python3-pip ffmpeg</span><br></pre></td></tr></table></figure>
+
+<p>由于该系统自带python版本为<code>3.10.7</code>，如果有其他版本需求请自行搜索相关方法安装</p>
+<h3 id="安装poetry"><a href="#安装poetry" class="headerlink" title="安装poetry"></a>安装poetry</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install poetry</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装小派蒙"><a href="#安装小派蒙" class="headerlink" title="安装小派蒙"></a>安装小派蒙</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone --depth=1 https://github.com/CMHopeSunshine/LittlePaimon.git</span><br><span class="line">#国内加速地址</span><br><span class="line">git clone --depth=1 https://ghproxy.com/https://github.com/CMHopeSunshine/LittlePaimon.git</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装小派蒙所需的环境"><a href="#安装小派蒙所需的环境" class="headerlink" title="安装小派蒙所需的环境"></a>安装小派蒙所需的环境</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd LittlePaimon</span><br><span class="line">poetry install</span><br><span class="line">#等待安装完成，如果中途有报错等待完成重新执行一次poetry install即可</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装go-cqhttp"><a href="#安装go-cqhttp" class="headerlink" title="安装go-cqhttp"></a>安装go-cqhttp</h3><p>由于termux不方便进行多进程管理，故本教程使用go-cqhttp的nonebot插件形式，如有安装本体需要自行搜索方法即可。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">poetry run nb plugin install nonebot_plugin_gocqhttp</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改-env-prod配置文件"><a href="#修改-env-prod配置文件" class="headerlink" title="修改.env.prod配置文件"></a>修改<code>.env.prod</code>配置文件</h3><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">HOST=0.0.0.0</span><br><span class="line">PORT=13579 # 根据自己所需端口修改</span><br><span class="line">LOG_LEVEL=INFO</span><br><span class="line">SUPERUSERS=[&quot;123456&quot;] # 修改123456为你bot管理者的qq号</span><br><span class="line">NICKNAME=[&quot;派蒙&quot;] # 机器人的昵称，建议只留一个</span><br><span class="line">COMMAND_START=[&quot;&quot;] # 命令前缀，根据需要自行修改</span><br><span class="line">COMMAND_SEP=[&quot;&quot;]</span><br></pre></td></tr></table></figure>
+
+<h3 id="启动小派蒙"><a href="#启动小派蒙" class="headerlink" title="启动小派蒙"></a>启动小派蒙</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">poetry run nb run</span><br></pre></td></tr></table></figure>
+
+<p>按提示登录gocq，推荐使用局域网ip在电脑登录，见附录<a href="#termux%E5%AE%89%E8%A3%85openssh%E8%AE%A9%E7%94%B5%E8%84%91%E6%8E%A7%E5%88%B6%E6%89%8B%E6%9C%BAtermux">openssh</a>部分</p>
+<p><strong>提示：首次启动小派蒙需要下载resources资源包，如果手机有root权限能管理data&#x2F;data文件夹推荐到<a target="_blank" rel="noopener" href="https://www.123pan.com/s/7VA9-IrqVv">https://www.123pan.com/s/7VA9-IrqVv</a> 下载资源包并解压为resources文件夹放到LittlePaimon根目录（目前更新时间为10.27，请注意时效性）</strong></p>
+<p><strong>好了，现在已经完成你的小派蒙安装了！</strong>如需安装其他插件，请使用<code>poetry run nb plugin install xxx</code></p>
+<p>下面是启动成功图</p>
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/xf3OQU"><img src="https://s1.ax1x.com/2022/10/27/xf3OQU.png" alt="xf3OQU.png"></a></p>
+<h2 id="附录："><a href="#附录：" class="headerlink" title="附录："></a>附录：</h2><h3 id="termux安装openssh让电脑控制手机termux"><a href="#termux安装openssh让电脑控制手机termux" class="headerlink" title="termux安装openssh让电脑控制手机termux"></a>termux安装openssh让电脑控制手机termux</h3><p>关掉之前的termux重新打开termux，或者在ubuntu内执行<code>exit</code>也可回到termux</p>
+<p>执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkg install openssh -y </span><br></pre></td></tr></table></figure>
+
+<p>输入<code>ifconfig</code>查看局域网ip，如图wlan0后<code>192.168.3.106</code>即为你的局域网ip</p>
+<p><img src="https://s1.ax1x.com/2022/10/27/xf3Fbj.png" alt="xf3Fbj.png"></p>
+<p>输入<code>whoami</code>查看你的用户名</p>
+<p><img src="https://s1.ax1x.com/2022/10/27/xf3irQ.png" alt="xf3irQ.png"></p>
+<p>输入<code>passwd</code>设置你的登陆密码</p>
+<p><img src="https://s1.ax1x.com/2022/10/27/xf3AVs.png" alt="xf3AVs.png"></p>
+<p>在你所熟悉的电脑ssh软件中输入上述信息，默认端口为<code>8022</code>，即可连接。</p>
+<p><strong>每次重新打开termux需要手动输入<code>sshd</code>进入openssh，如需每次打开termux自动启动openssh，请按照如下操作</strong></p>
+<p>打开termux，<strong>不要进入ubuntu!</strong> ，输入<code>touch .bashrc</code> ，随后使用你熟悉的编辑软件<code>nano</code>，<code>vim</code>或者<code>sftp</code>等编辑.bashrc文件添加如下内容并保存随后重启termux即可。如果你的终端为zsh，那么需要创建<code>.zshrc</code>而非<code>.bashrc</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;用户: &quot;$(whoami)</span><br><span class="line">if pgrep -x &quot;sshd&quot; &gt;/dev/null</span><br><span class="line"> then</span><br><span class="line">  echo &quot;ssh服务已启动&quot;</span><br><span class="line"> else</span><br><span class="line">  sshd</span><br><span class="line">  echo &quot;成功启动ssh服务&quot;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://imgse.com/i/xf3xeJ"><img src="https://s1.ax1x.com/2022/10/27/xf3xeJ.png" alt="xf3xeJ.png"></a></p>
+<p><strong>ps：如果使用openssh推荐使用screen命令来运行小派蒙</strong></p>
+<p>进入ubuntu系统<code>tmoe p/c ubuntu-kinetic</code> (p 指 PRoot 容器，c 指 chroot 容器)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install screen</span><br><span class="line">screen -S bot #新建一个名为bot的screen窗口</span><br><span class="line">screen -R bot #回到一个名为bot的窗口</span><br></pre></td></tr></table></figure>
+
+<p><strong>进入screen后正常启动小派蒙即可，启动后可以在电脑上使用<code>局域网ip:端口/go-cqhttp/</code> 进入gocq网页端登录你的qq号</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/11/08/Android-Termux%E5%AE%89%E8%A3%85LittlePaimon/" data-id="cla81gjvc0000ccu5ad4b04vl" data-title="Android-Termux安装LittlePaimon" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LittlePaimon/" rel="tag">LittlePaimon</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/11/08/hello-world/" class="article-date">
@@ -110,7 +231,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/08/hello-world/" data-id="cla81cgl10001m0u5gd58d8wr" data-title="Hello World" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/08/hello-world/" data-id="cla81gjvg0001ccu58jyjdu6m" data-title="Hello World" class="article-share-link">Share</a>
       
       
       
@@ -132,9 +253,23 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/LittlePaimon/" rel="tag">LittlePaimon</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/LittlePaimon/" style="font-size: 10px;">LittlePaimon</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -151,6 +286,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2022/11/08/Android-Termux%E5%AE%89%E8%A3%85LittlePaimon/">Android-Termux安装LittlePaimon</a>
+          </li>
         
           <li>
             <a href="/2022/11/08/hello-world/">Hello World</a>
